@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import { onMount } from 'svelte';
   let count: number = 0;
   onMount(() => {
