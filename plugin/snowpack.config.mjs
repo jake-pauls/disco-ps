@@ -1,5 +1,5 @@
-/** 
- * @type {import("snowpack").SnowpackUserConfig } 
+/**
+ * @type {import("snowpack").SnowpackUserConfig }
  */
 export default {
   mount: {
@@ -19,9 +19,22 @@ export default {
     [
       '@snowpack/plugin-webpack',
       {
-        /* */
+        /* Extend webpack build configuration to allow external modules */
         sourceMap: false,
+        extendConfig: (config) => {
+          config.externals = {
+            uxp: 'commonjs2 uxp',
+            photoshop: 'commonjs2 photoshop',
+          };
+          config.output.filename = 'js/[name].js';
+
+          return config;
+        },
       },
     ],
   ],
+  packageOptions: {
+    /* Mark required tools as external in final build */
+    external: ['uxp', 'photoshop'],
+  },
 };

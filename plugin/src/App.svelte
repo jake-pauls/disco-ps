@@ -9,51 +9,11 @@
   });
 </script>
 
-<div class="App">
-  <header class="App-header">
-    <p>Webpack! <code>src/App.svelte</code> and save to reload.</p>
-    <p>Page has been open for <code>{count}</code> seconds.</p>
-    <p>
-      <a
-        class="App-link"
-        href="https://svelte.dev"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Svelte
-      </a>
-    </p>
-  </header>
+<div>
+  <sp-heading>Welcome to eye-love-ps!</sp-heading>
+  <sp-heading>This is a heading</sp-heading>
+  <sp-detail>Plugin has been open for <code>{count}</code> seconds.</sp-detail>
 </div>
 
 <style>
-  :global(body) {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .App {
-    text-align: center;
-  }
-  .App code {
-    background: #0002;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-  .App p {
-    margin: 0.4rem;
-  }
-
-  .App-header {
-    background-color: #f9f6f6;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-  }
-  .App-link {
-    color: #ff3e00;
-  }
 </style>
