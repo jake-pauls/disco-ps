@@ -11,7 +11,7 @@
 
 <div>
   <sp-heading>Welcome to eye-love-ps!</sp-heading>
-  <sp-heading>This is a heading</sp-heading>
+  <sp-heading>This a heading</sp-heading>
   <sp-detail>Plugin has been open for <code>{count}</code> seconds.</sp-detail>
 </div>
 

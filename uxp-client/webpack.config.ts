@@ -53,7 +53,7 @@ const config: Configuration = {
   plugins: [
     new CopyPlugin({
       /* Copy manifest and uxp assets into final build */
-      patterns: ['public'],
+      patterns: ['plugin'],
     }),
   ],
 };
