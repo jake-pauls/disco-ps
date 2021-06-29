@@ -5,7 +5,11 @@ project(disco-ps VERSION 1.0.0)
 
 # Define lib code
 set(LIB_NAME ${PROJECT_NAME}-lib)
-add_library(${LIB_NAME} src)
+add_library(${LIB_NAME} 
+    src/AppComponent.hpp
+    src/controller/AppController.hpp
+    src/controller/AppController.cpp
+    src/dto/DTOs.hpp)
 
 # Oat++
 find_package(oatpp 1.2.5 REQUIRED)
