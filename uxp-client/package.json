@@ -1,7 +1,6 @@
 {
-  "name": "eye-love-ps",
+  "name": "disco-ps",
   "version": "1.0.0",
-  "description": "Photoshop plugin that leverages eye-tracking to perform client tasks",
   "license": "MIT",
   "author": {
     "name": "Jake Pauls",
@@ -9,7 +8,7 @@
     "url": "https://jakepauls.dev"
   },
   "scripts": {
-    "watch": "nodemon -w src -e ts,svelte,js,mjs,html,css -x yarn build",
+    "watch": "webpack -w --mode development",
     "build": "webpack --mode development"
   },
   "dependencies": {
@@ -21,7 +20,6 @@
     "@types/copy-webpack-plugin": "^8.0.0",
     "@types/node": "^15.12.4",
     "copy-webpack-plugin": "^9.0.0",
-    "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
     "svelte-check": "^2.2.0",
     "svelte-loader": "^3.1.2",

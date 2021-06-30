@@ -20,7 +20,7 @@ void run() {
     
     // Launch server
     oatpp::network::Server server(connectionProvider, connectionHandler);
-    OATPP_LOGI("DISCORD-PS-OAT", "Server running on port %s", connectionProvider->getProperty("port").getData());
+    OATPP_LOGI("DISCO-PS-CORE", "Server running on port %s", connectionProvider->getProperty("port").getData());
     server.run();
 }
 
@@ -29,9 +29,9 @@ int main(int argc, const char * argv[]) {
 
     run(); 
 
-    std::cout << "\nEnvironment:\n";
-    std::cout << "objectsCount = " << oatpp::base::Environment::getObjectsCount() << "\n";
-    std::cout << "objectsCreated = " << oatpp::base::Environment::getObjectsCreated() << "\n\n";
+    std::cout << "\nEnvironment:\n" << std::endl;
+    std::cout << "objectsCount = " << oatpp::base::Environment::getObjectsCount() << "\n" << std::endl;
+    std::cout << "objectsCreated = " << oatpp::base::Environment::getObjectsCreated() << "\n\n" << std::endl;
 
     oatpp::base::Environment::destroy();
 
