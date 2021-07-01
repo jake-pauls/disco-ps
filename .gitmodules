@@ -4,3 +4,6 @@
 [submodule "oat-server/vendor/cpp-dotenv"]
 	path = oat-server/vendor/cpp-dotenv
 	url = https://github.com/adeharo9/cpp-dotenv.git
+[submodule "oat-server/vendor/oatpp"]
+	path = oat-server/vendor/oatpp
+	url = https://github.com/oatpp/oatpp

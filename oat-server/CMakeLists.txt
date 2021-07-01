@@ -3,6 +3,26 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(disco-ps VERSION 1.0.0)
 
+# Check if submodules are pulled
+find_package(Git QUIET)
+
+set(GIT_CMD git submodule update ${FLAGS} --init --recursive)
+
+if(GIT_FOUND)
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if (GIT_SUBMODULE)
+        message(STATUS "Verifying if submodules are up to date...")
+        execute_process(COMMAND ${GIT_CMD} 
+                        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_RESULT)               
+        if(GIT_RESULT EQUAL "0")
+            message(STATUS "Successfully updated git submodules")
+        else()
+            message(FATAL_ERROR "Updating git submodules failed with ${GIT_RESULT}")
+        endif()
+    endif()
+endif()
+
 # Define lib code
 set(LIB_NAME ${PROJECT_NAME}-lib)
 set(LIBRARY_SOURCES 
@@ -17,7 +37,7 @@ add_library(${LIB_NAME} STATIC ${LIBRARY_SOURCES})
 set_target_properties(${LIB_NAME} PROPERTIES PREFIX "")
  
 # Oat++ (server)
-find_package(oatpp 1.2.5 REQUIRED)
+add_subdirectory(vendor/oatpp)
 
 # sleepy-discord (api lib)
 add_subdirectory(vendor/sleepy-discord)
@@ -27,7 +47,7 @@ add_subdirectory(vendor/cpp-dotenv)
 
 # Bundle lib
 set(VENDOR_LIBRARIES
-    oatpp::oatpp
+    oatpp
     sleepy-discord
     cpp_dotenv)
 
