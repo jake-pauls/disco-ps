@@ -1,11 +1,14 @@
 #include "./AppComponent.hpp"
 #include "./controller/AppController.hpp"
+#include "./bot/BotClient.hpp"
 
 #include "oatpp/network/Server.hpp"
+#include "dotenv.h" 
 
 #include <iostream>
+#include <thread>
 
-void run() {
+void serverRun() {
     AppComponent components;
 
     OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
@@ -24,14 +27,24 @@ void run() {
     server.run();
 }
 
+void botRun() {
+    BotClient client(dotenv::env["BOT_TOKEN"], SleepyDiscord::USER_CONTROLED_THREADS);
+    client.setIntents(SleepyDiscord::Intent::SERVER_MESSAGES);
+    client.run();
+}
+
 int main(int argc, const char * argv[]) {
+    dotenv::env.load_dotenv();
+    std::cout << "[dotenv] Environment loaded successfully" << std::endl;
+
+    // Initialize and destroy oat environment
     oatpp::base::Environment::init();
 
-    run(); 
-
-    std::cout << "\nEnvironment:\n" << std::endl;
-    std::cout << "objectsCount = " << oatpp::base::Environment::getObjectsCount() << "\n" << std::endl;
-    std::cout << "objectsCreated = " << oatpp::base::Environment::getObjectsCreated() << "\n\n" << std::endl;
+    // Run the server and bot on separate threads 
+    std::thread server(serverRun);
+    std::thread bot(botRun);
+    server.join();
+    bot.join();
 
     oatpp::base::Environment::destroy();
 

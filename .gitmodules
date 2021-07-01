@@ -1,0 +1,6 @@
+[submodule "oat-server/vendor/sleepy-discord"]
+	path = oat-server/vendor/sleepy-discord
+	url = https://github.com/yourWaifu/sleepy-discord.git
+[submodule "oat-server/vendor/cpp-dotenv"]
+	path = oat-server/vendor/cpp-dotenv
+	url = https://github.com/adeharo9/cpp-dotenv.git
