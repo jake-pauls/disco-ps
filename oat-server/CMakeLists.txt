@@ -5,13 +5,16 @@ project(disco-ps VERSION 1.0.0)
 
 # Define lib code
 set(LIB_NAME ${PROJECT_NAME}-lib)
-set(LIBS 
-    src/AppComponent.hpp
-    src/controller/AppController.hpp
-    src/controller/AppController.cpp
-    src/dto/DTOs.hpp)
+set(LIBRARY_SOURCES 
+    src/api/components/AppComponent.hpp
+    src/api/controller/AppController.hpp
+    src/api/controller/AppController.cpp
+    src/api/dto/DTOs.hpp
+    src/bot/BotClient.hpp)
 
-add_library(${LIB_NAME} STATIC ${LIBS})
+# Statically link lib code
+add_library(${LIB_NAME} STATIC ${LIBRARY_SOURCES})
+set_target_properties(${LIB_NAME} PROPERTIES PREFIX "")
  
 # Oat++ (server)
 find_package(oatpp 1.2.5 REQUIRED)
@@ -30,18 +33,18 @@ set(VENDOR_LIBRARIES
 
 target_link_libraries(${LIB_NAME} ${VENDOR_LIBRARIES})
 
+# Include src
 target_include_directories(${LIB_NAME} PUBLIC src)
 
 # Bundle executable
 set(EXECUTABLE_NAME ${PROJECT_NAME}-core)
-add_executable(${EXECUTABLE_NAME} 
-    src/App.cpp)
+add_executable(${EXECUTABLE_NAME} src/App.cpp)
  
 target_link_libraries(${EXECUTABLE_NAME} ${LIB_NAME})
 add_dependencies(${EXECUTABLE_NAME} ${LIB_NAME})
 
 # Copy local env file after build
-add_custom_command(TARGET ${LIB_NAME} PRE_BUILD 
+add_custom_command(TARGET ${LIB_NAME} POST_BUILD 
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_SOURCE_DIR}/.env
             ${CMAKE_CURRENT_BINARY_DIR}/.env)

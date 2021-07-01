@@ -1,5 +1,5 @@
-#include "./AppComponent.hpp"
-#include "./controller/AppController.hpp"
+#include "./api/components/AppComponent.hpp"
+#include "./api/controller/AppController.hpp"
 #include "./bot/BotClient.hpp"
 
 #include "oatpp/network/Server.hpp"

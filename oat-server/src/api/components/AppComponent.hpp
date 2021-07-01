@@ -28,7 +28,6 @@ public:
     OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::data::mapping::ObjectMapper>, apiObjectMapper)([] {
         return oatpp::parser::json::mapping::ObjectMapper::createShared();
     }());
-
 };
 
 #endif /* AppComponent_hpp */ 
