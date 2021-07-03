@@ -8,22 +8,26 @@
 #include <iostream>
 #include <thread>
 
+void loadEnvFile() {
+    dotenv::env.load_dotenv();
+    std::cout << "[dotenv] Environment loaded successfully" << std::endl;
+}
+
 void serverRun() {
+    // Create scoped environment components
     AppComponent components;
 
-    OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
-
     // Create a controller and append all endpoints
-    auto appController = std::make_shared<AppController>();
+    auto router = components.httpRouter.getObject();
+    auto appController = AppController::createShared();
     appController->addEndpointsToRouter(router); 
 
-    // Inistalize handler and provider
-    OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, connectionHandler);
-    OATPP_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, connectionProvider);
-    
-    // Launch server
-    oatpp::network::Server server(connectionProvider, connectionHandler);
-    OATPP_LOGI("DISCO-PS-CORE", "Server running on port %s", connectionProvider->getProperty("port").getData());
+    // Initialize handler and provider
+    auto connectionProvider = components.serverConnectionProvider.getObject();
+    auto connectionHandler = components.serverConnectionHandler.getObject();
+    oatpp::network::Server server(connectionProvider, connectionHandler); 
+
+    OATPP_LOGI("DISCO-PS-CORE", " Server running on port %s ", connectionProvider->getProperty("port").getData());
     server.run();
 }
 
@@ -34,8 +38,7 @@ void botRun() {
 }
 
 int main(int argc, const char * argv[]) {
-    dotenv::env.load_dotenv();
-    std::cout << "[dotenv] Environment loaded successfully" << std::endl;
+    loadEnvFile();
 
     // Initialize and destroy oat environment
     oatpp::base::Environment::init();
