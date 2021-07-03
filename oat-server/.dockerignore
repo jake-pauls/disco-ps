@@ -1,0 +1,15 @@
+# git
+.git
+.github
+.gitignore
+
+# Docker
+*Dockerfile*
+
+# Local Build
+build/
+build.sh
+
+# Misc.
+README.md
+LICENSE

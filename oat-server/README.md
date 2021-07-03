@@ -12,7 +12,7 @@ BOT_TOKEN=
 
 2. Build and make the server/bot 
 ```
-./build.sh
+make oats
 ```
 
 **Note:** The first build may take *quite* some time, such is the disadvantage of submodules as opposed to locally installing the dependent packages.
