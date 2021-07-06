@@ -9,7 +9,7 @@ class BotClient : public SleepyDiscord::DiscordClient {
 public:
     using SleepyDiscord::DiscordClient::DiscordClient;
     void onMessage(SleepyDiscord::Message message) override {
-        std::cout << "[onMessage]: Triggered Hello WebSocket." << std::endl;
+        std::cout << "[onMessage]: Triggered Hello WebSocket. From channel: " << message.channelID << std::endl;
         if (message.startsWith("Hello bot!"))
             sendMessage(message.channelID, "Hello " + message.author.username);
     }

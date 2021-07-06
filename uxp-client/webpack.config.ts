@@ -36,6 +36,10 @@ const config: Configuration = {
         },
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         /* TypeScript Rules */
         test: /\.ts$/,
         use: 'ts-loader',
