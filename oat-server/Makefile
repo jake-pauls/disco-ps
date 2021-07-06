@@ -4,11 +4,11 @@
 
 oats:
 		@echo "Building oat server..."
-				mkdir -p build && \
-						cd build && \
-						cmake .. && \
-						$(MAKE) --no-print-directory && \
-						./disco-ps-core
+		mkdir -p build && \
+		  	cd build && \
+		  	cmake .. && \
+		  	$(MAKE) --no-print-directory && \
+		  	./disco-ps-core
 
 dock-oats:
 		@echo "Building docker image..."
